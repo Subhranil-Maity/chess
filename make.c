@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const char *c_args = " -Wall -Wextra -Werror -Wpedantic";
+// const char *c_args = " -Wall -Wextra -Werror -Wpedantic";
+const char *c_args = " -Wall -Wextra -Werror";
 #define debug " -g"
 
 void backup_self() {
@@ -32,13 +33,13 @@ void go_rebuild_your_self() {
 }
 int build_game_as_seperate_shared_library(){
 	const char *command = TextFormat("gcc ./src/game.c -o ./build/libgame.so -shared -fPIC %s %s -Wl,-rpath=./raylib/lib  -l:libraylib.so -L./raylib/lib/ -lm", c_args, debug);
-	printf("%s", command);
+	printf("%s\n", command);
 	return system(command);
 }
 int build_main() { 
 	// TODO link with raylib
 	const char *command = TextFormat("gcc ./src/main.c -o ./build/main.out %s %s -Wl,-rpath=./raylib/lib  -l:libraylib.so -L./raylib/lib/ -lm", c_args, debug);
-	printf("%s", command);
+	printf("%s\n", command);
 	return system(command);
 }
 
